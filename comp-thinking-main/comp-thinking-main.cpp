@@ -2,19 +2,42 @@
 //
 
 #include <iostream>
+#include "Graph.h"
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+    
+    unique_ptr<Graph> graph = make_unique<Graph>();
+
+    graph->addNode("Oliver");
+    graph->addNode("Martin");
+    graph->addNode("Preston");
+    graph->addNode("UCLan");
+    graph->addNode("Larnaka");
+
+    Node::Edge teachesAt = { "teaches at", (graph->getNode("UCLan")) };
+    Node::Edge livesIn = { "lives in", (graph->getNode("Preston")) };
+    Node::Edge hasCampus = { "has campus in", (graph->getNode("Preston")) };
+    Node::Edge hasCampusL = { "has campus in", (graph->getNode("Larnaka")) };
+
+
+    graph->getNode("Oliver")->addEdge(teachesAt);
+    graph->getNode("Martin")->addEdge(teachesAt);
+    graph->getNode("Oliver")->addEdge(livesIn);
+    graph->getNode("Martin")->addEdge(livesIn);
+    graph->getNode("UCLan")->addEdge(hasCampus);
+    graph->getNode("UCLan")->addEdge(hasCampusL);
+
+
+    graph->displayAll();
+
+
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
