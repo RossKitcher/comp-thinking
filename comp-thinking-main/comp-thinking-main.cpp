@@ -22,22 +22,22 @@ int main()
     graph->addNode("Preston");
     graph->addNode("UCLan");
     graph->addNode("Larnaka");
+    graph->addNode("England");
 
-    Node::Edge teachesAt = { "teaches at", (graph->getNode("UCLan")) };
-    Node::Edge livesIn = { "lives in", (graph->getNode("Preston")) };
-    Node::Edge hasCampus = { "has campus in", (graph->getNode("Preston")) };
-    Node::Edge hasCampusL = { "has campus in", (graph->getNode("Larnaka")) };
-
-
-    graph->getNode("Oliver")->addEdge(teachesAt);
-    graph->getNode("Martin")->addEdge(teachesAt);
-    graph->getNode("Oliver")->addEdge(livesIn);
-    graph->getNode("Martin")->addEdge(livesIn);
-    graph->getNode("UCLan")->addEdge(hasCampus);
-    graph->getNode("UCLan")->addEdge(hasCampusL);
+    graph->addEdge("Oliver", { "teaches at", "UCLan" });
+    graph->addEdge("Martin", { "teaches at", "UCLan" });
+    graph->addEdge("Oliver", { "lives in", "Preston" });
+    graph->addEdge("Martin", { "lives in", "Preston" });
+    graph->addEdge("UCLan", { "has campus in", "Preston" });
+    graph->addEdge("UCLan", { "has campus in", "Larnaka" });
+    graph->addEdge("Preston", { "is in", "England" });
 
 
-    graph->displayAll();
+    // The problem
+    vector<string> p = { "teaches at", "has campus in"};
+    vector<string> q = { "lives in" };
+
+    graph->solve(p, q);
 
 
 }
